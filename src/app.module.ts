@@ -17,7 +17,6 @@ import { UsersController } from './users/users.controller';
       imports: [ConfigModule],
       useFactory: async (configService: ConfigService) => {
         const uri = configService.get<string>('MONGO_DB_CONNECTION_STRING');
-        console.log('MongoDB URI:', uri);  // тут виводимо в консоль
         return { uri };
       },
       inject: [ConfigService],
