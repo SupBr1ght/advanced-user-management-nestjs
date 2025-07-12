@@ -1,17 +1,17 @@
-import { Module } from '@nestjs/common';
-import { AuthController } from './auth.controller';
-import { AuthService } from './auth.service';
-import { UsersModule } from 'src/users/users.module';
+import { Module, forwardRef } from '@nestjs/common';
 import { JwtModule } from '@nestjs/jwt';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { UsersModule } from '../users/users.module';
+import { AuthService } from './auth.service';
+import { AuthController } from './auth.controller';
+import { JwtStrategy } from './jwt.strategy';
 
 @Module({
-
   imports: [
      ConfigModule.forRoot({
       isGlobal: true,  // робить ConfigModule доступним у всіх модулях
     }),
-    UsersModule,
+    forwardRef(() => UsersModule),
     JwtModule.registerAsync({
       useFactory: async (configService: ConfigService) => {
         const secret = configService.get<string>('JWT_SECRET');
@@ -25,6 +25,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 
   ],
   controllers: [AuthController],
-  providers: [AuthService]
+  providers: [AuthService, JwtStrategy],
+  exports: [JwtModule],
 })
 export class AuthModule { }

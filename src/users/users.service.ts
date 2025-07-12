@@ -16,12 +16,7 @@ export class UsersService {
 
   async createUser(createUserDto: CreateUserDto) {
     // get hash and salt from new hashed password
-    const { username, lastname, firstname, password } = createUserDto;
-
-    if (!username || !lastname || !password) {
-      this.logger.error('Username is missing in createUserDto');
-      throw new Error('Username is required.');
-    }
+    const { username, lastname, firstname, password, roles } = createUserDto;
 
     const { hash, salt } =  hashPassword(password);
 
@@ -32,15 +27,16 @@ export class UsersService {
       firstname: firstname || undefined,   
       passwordHash: hash,
       passwordSalt: salt,
+      roles
     };
     //save it into the data base
     const createdUser = new this.userModel(newUser);
     return createdUser.save();
   }
 
-  async findOne(username: string): Promise<User | undefined> {
+  async findOne(username: string): Promise<UserDocument | null> {
     const user = await this.userModel.findOne({ username }).exec();
     //if user non exist return undefined
-    return user ? (user.toObject ? user.toObject() : user) as User : undefined;
+    return user 
   }
 }
