@@ -7,6 +7,41 @@
 
   <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
     <p align="center">
+# ⚔️ Advanced User Management API (Nest.js)
+
+A secure and scalable user management system built with NestJS and TypeScript.  
+Includes role-based access control (RBAC), JWT authentication, and best practices.
+
+---
+
+## ✨ Features
+
+- 👤 Register & login with JWT
+- 🔐 Role-based access: `user`, `moderator`, `admin`
+- 🧾 Protected routes with custom guards
+- ♻️ Refresh tokens (optional)
+- 💥 Global error handling
+- 🧪 Unit & E2E testing ready
+- ✅ Clean folder structure (Domain-Driven Design)
+
+---
+
+## 📚 Tech Stack
+
+- Nest.js
+- TypeScript
+- MongoDB (Mongoose)
+- JWT Auth
+- bcrypt
+- dotenv
+- class-validator / class-transformer
+- eslint + prettier
+
+---
+
+## 📁 Project Structure
+
+
 <a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
 <a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
 <a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
