@@ -7,6 +7,7 @@ import { ConfigModule } from '@nestjs/config';
 import { ConfigService } from '@nestjs/config';
 import { AuthModule } from './auth/auth.module';
 import { UsersController } from './users/users.controller';
+import { JwtModule } from '@nestjs/jwt';
 
 @Module({
   imports: [
@@ -17,13 +18,13 @@ import { UsersController } from './users/users.controller';
       imports: [ConfigModule],
       useFactory: async (configService: ConfigService) => {
         const uri = configService.get<string>('MONGO_DB_CONNECTION_STRING');
-        console.log('MongoDB URI:', uri);  // тут виводимо в консоль
         return { uri };
       },
       inject: [ConfigService],
     }),
     UsersModule,
-    AuthModule
+    AuthModule,
+    JwtModule
   ],
   controllers: [AppController, UsersController],
   providers: [AppService],

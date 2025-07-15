@@ -5,6 +5,7 @@ export type UserDocument = User & Document;
 
 @Schema()
 export class User {
+
   @Prop({ required: true })
   username: string;
 
@@ -20,6 +21,11 @@ export class User {
   @Prop()
   passwordHash: string;
 
+   @Prop({ type: [String], default: ['user'] }) 
+  roles: string[];
+
 }
+
+
 
 export const UserSchema = SchemaFactory.createForClass(User);
